@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchCalendar from '../../actions';
-import mockData from './data';
 
 import Calendar from '../Calendar';
 import Event from '../Event';
@@ -18,10 +17,11 @@ class Home extends Component {
   }
 
   render() {
-    const eventObjects = mockData.data.calendar.upcomingEvents.edges;
+    const { upcomingEvents, background, name, subscriberCount } = this.props.calendar.data.calendar;
+    const eventObjects = upcomingEvents.edges;
     return(
       <div>
-        <Calendar name={mockData.data.calendar.name} subscriberCount={mockData.data.calendar.subscriberCount} />
+        <Calendar image={background} name={name} subscriberCount={subscriberCount} />
         <div className="home">
           {eventObjects.map((event, idx) => {
             return <Event key={idx} event={event} />
